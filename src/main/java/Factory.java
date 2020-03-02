@@ -26,6 +26,9 @@ public class Factory {
             process = input.substring(firstSlashIndex+1, httpIndex-1);
         }
 
+        // Add endpoint name to map
+        args.put("endpoint", process);
+
         if (firstEqualIndex != -1) {
             String param = input.substring(firstQuestIndex+1, firstEqualIndex);
             String value = "";
@@ -44,8 +47,6 @@ public class Factory {
         }
 
         // Testing parsing by printing out
-        System.out.println("process: " + process);
-
         for (Map.Entry<String, String> entry : args.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
@@ -54,18 +55,18 @@ public class Factory {
         switch(process) {
             case "addPaymentMethod":
             case "getAllPaymentMethods":
-                // Send to PaymentProcessor
+                // Send args map to PaymentProcessor
                 break;
             case "addItems":
             case "listItems":
-                // Send to ItemsProcessor
+                // Send args map ItemsProcessor
                 break;
             case "createTransaction":
             case "listTransactions":
-                // Send to TransactionsProcessor
+                // Send args map to TransactionsProcessor
                 break;
             default:
-                // Not valid, print error code?
+                // Not valid, send error code?
         }
     }
 
