@@ -31,6 +31,11 @@ public class Main {
           String line = in.readLine();
           System.out.println("----------REQUEST START---------");
           System.out.println(line);
+
+          // Send to Factory
+          Factory factory = new Factory();
+          factory.factory(line);
+
           // read only headers
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
