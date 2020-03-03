@@ -2,9 +2,7 @@ import java.util.*;
 
 public class Factory {
 
-    private String input;
-
-    public void factory(String input) {
+    public static void process(String input) {
         int firstSlashIndex,
                 firstQuestIndex,
                 httpIndex,
@@ -57,17 +55,18 @@ public class Factory {
             case "getAllPaymentMethods":
                 // Send args map to PaymentProcessor
                 break;
-            case "addItems":
+            case "addItem":
             case "listItems":
                 // Send args map ItemsProcessor
-                break;
+                ItemsProcessor itemsProcessor = new ItemsProcessor();
+                itemsProcessor.process(args);
             case "createTransaction":
             case "listTransactions":
                 // Send args map to TransactionsProcessor
                 break;
             default:
                 // Not valid, send error code?
+                System.out.println("Error"); // For testing
         }
     }
-
 }

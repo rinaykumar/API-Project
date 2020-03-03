@@ -7,3 +7,5 @@ public class ItemsDTOList {
         this.items = items;
     }
 }
+
+// May not be needed, list of items/etc can be stored in DAO?

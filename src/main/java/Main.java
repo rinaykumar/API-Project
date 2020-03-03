@@ -34,7 +34,7 @@ public class Main {
 
           // Send to Factory
           Factory factory = new Factory();
-          factory.factory(line);
+          factory.process(line);
 
           // read only headers
           line = in.readLine();
