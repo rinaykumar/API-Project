@@ -9,6 +9,11 @@ public class TransactionDAO {
         return Instance;
     }
 
+    public static TransactionDAO listTransaction() {
+        Instance = new TransactionDAO();
+        return Instance;
+    }
+
     private TransactionDAO() {
         // constructor
     }
