@@ -26,12 +26,25 @@ public class Main {
 
         InputStream stream = dong.getInputStream();
         BufferedReader in = new BufferedReader(new InputStreamReader(stream));
+
+        String line;
+        line = in.readLine();
+        String request_method = line;
+        System.out.println("HTTP-HEADER: " + line);
+//        String inputLine;
+//        while (!(inputLine = in.readLine()).equals(""))
+//          System.out.println(inputLine);
+
         try {
           // read the first line to get the request method, URI and HTTP version
-          String line = in.readLine();
           System.out.println("----------REQUEST START---------");
           System.out.println(line);
           // read only headers
+
+          // Send to Factory
+          Factory factory = new Factory();
+          factory.process(line);
+
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
             int index = line.indexOf(": ");
