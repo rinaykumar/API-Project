@@ -60,8 +60,12 @@ public class Factory {
                 // Send args map ItemsProcessor
 
             case "createTransaction":
+                // Send request to TransactionsProcessor
+
             case "listTransactions":
                 // Send args map to TransactionsProcessor
+                TransactionProcessor transactionProcessor = new TransactionProcessor();
+                transactionProcessor.process(args);
                 break;
             default:
                 // Not valid, send error code?
