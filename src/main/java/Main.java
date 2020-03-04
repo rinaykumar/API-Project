@@ -1,3 +1,5 @@
+import com.google.gson.*;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +14,10 @@ public class Main {
   public static void main(String[] args) throws IOException {
     ServerSocket ding;
     Socket dong = null;
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String json = "";
+
     try {
       ding = new ServerSocket(1299);
       System.out.println("Opened socket " + 1299);
@@ -34,7 +40,7 @@ public class Main {
 
           // Send to Factory
           Factory factory = new Factory();
-          factory.process(line);
+          json = gson.toJson(factory.process(line));
 
           // read only headers
           line = in.readLine();
@@ -64,7 +70,8 @@ public class Main {
         writer.println("");
 
         // Body of our response
-        writer.println("<h1>Hello from 413</h1>");
+        //writer.println("<h1>Hello from 413</h1>");
+        writer.println("<p>" + json + "/<p>");
 
         dong.close();
       }

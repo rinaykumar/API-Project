@@ -1,8 +1,10 @@
+import builder.ResponseDTO;
+
 import java.util.*;
 
 public class Factory {
 
-    public static void process(String input) {
+    public static ResponseDTO process(String input) {
         int firstSlashIndex,
                 firstQuestIndex,
                 httpIndex,
@@ -59,7 +61,7 @@ public class Factory {
             case "listItems":
                 // Send args map ItemsProcessor
                 ItemsProcessor itemsProcessor = new ItemsProcessor();
-                itemsProcessor.process(args);
+                return itemsProcessor.process(args);
             case "createTransaction":
             case "listTransactions":
                 // Send args map to TransactionsProcessor
@@ -68,5 +70,6 @@ public class Factory {
                 // Not valid, send error code?
                 System.out.println("Error"); // For testing
         }
+        return null;
     }
 }
