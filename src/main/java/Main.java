@@ -6,12 +6,17 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import com.google.gson.*;
 
 public class Main {
 
   public static void main(String[] args) throws IOException {
     ServerSocket ding;
     Socket dong = null;
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String json = "";
+
     try {
       ding = new ServerSocket(1299);
       System.out.println("Opened socket " + 1299);
@@ -31,6 +36,11 @@ public class Main {
           String line = in.readLine();
           System.out.println("----------REQUEST START---------");
           System.out.println(line);
+
+          //Send to Processor
+          Processor processor = new Processor();
+          json = gson.toJson(processor.makeProcess(line));
+
           // read only headers
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
@@ -59,7 +69,8 @@ public class Main {
         writer.println("");
 
         // Body of our response
-        writer.println("<h1>Hello from 413</h1>");
+        writer.println("<h1>Homework 1 codecamp101 </h1>");
+        writer.println("<body>" + json +"</body>");
 
         dong.close();
       }

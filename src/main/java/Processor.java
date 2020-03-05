@@ -58,16 +58,17 @@ public class Processor {
         }
         switch(method){
             case "/addPaymentMethod":
-                //create paymentDTO to process machine code
-                //PaymentMethods PaymentMethods = new ResponseDTO();
-                //return PaymentMethods.addPay(args);
+             //   System.out.println("addPaymentTest");
+                PaymentMethods PaymentMethods = new PaymentMethods();
+                return PaymentMethods.process(args);
 
-                ResponseBuilder builder = new ResponseBuilder()
-                        .setDate(new Date())
-                        .setResCode("OK")
-                        .setResponse("To be updated. . . ")
-                        .setPara(args);
-                        builder.build();
+               // ResponseBuilder builder = new ResponseBuilder()
+               //         .setDate(new Date())
+               //         .setResCode("OK")
+               //         .setResponse("To be updated. . . ")
+                 //       .setPara(args);
+                 //      builder.build();
+
 
             case "/getAllPaymentMethods":
                 ResponseBuilder builder2 = new ResponseBuilder()

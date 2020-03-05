@@ -16,6 +16,7 @@ public class PaymentDAO {
         database.add(data);
     }
 
+    //optional, can be removed when merge, not implemented
     public void delete(PaymentDTO data){
         database.remove(data);
     }

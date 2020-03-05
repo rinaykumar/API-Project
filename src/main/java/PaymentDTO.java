@@ -1,9 +1,9 @@
 public class PaymentDTO {
-    public final String name;
+    public final String method;
     public final String code;
 
-    public PaymentDTO(String name, String code) {
-        this.name = name;
+    public PaymentDTO(String method, String code) {
+        this.method = method;
         this.code = code;
     }
 }
