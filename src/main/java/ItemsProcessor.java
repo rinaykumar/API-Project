@@ -4,6 +4,9 @@ import java.util.*;
 
 public class ItemsProcessor extends Factory {
 
+    public static List<ItemsDTO> itemsList = new ArrayList<ItemsDTO>();
+    Date date = new Date();
+
     public ResponseDTO process(Map<String, String> args) {
 
         String endpoint = args.get("endpoint");
@@ -14,7 +17,7 @@ public class ItemsProcessor extends Factory {
         }
 
         if (endpoint.equals("listItems")) {
-            listItems();
+            return listItems(args);
         }
         return null;
     }
@@ -25,27 +28,28 @@ public class ItemsProcessor extends Factory {
         System.out.println("Add Item");
         // To do: add name, price, machineCode via DAO? Then send where?
 
-        Date date = new Date();
+
         UUID uuid = UUID.randomUUID();
         String machineCode = uuid.toString();
 
-        //ItemsDTO addItemsDTO = new ItemsDTO(args.get("name"), args.get("price"), machineCode);
-
+        ItemsDTO addItemsDTO = new ItemsDTO(args.get("name"), args.get("price"), machineCode);
         args.put("machineCode", machineCode);
-
         ResponseDTO addItemsResponseDTO = new ResponseDTO(date, args, "OK", "Item Added");
 
         //ItemsDAO addItemsResponseDAO = new ItemsDAO(addItemsResponseDTO);
-
         //return addItemsResponseDAO;
+
+        itemsList.add(addItemsDTO);
 
         return addItemsResponseDTO;
     }
 
-    public void listItems() {
+    public ResponseDTO listItems(Map<String, String> args) {
         // For testing
         System.out.println("From ItemsProcessor");
         System.out.println("List Items");
         // To do: list all items, as in list DAO objects?
+
+        return new ResponseDTO(date, args, "OK", "List of Items");
     }
 }

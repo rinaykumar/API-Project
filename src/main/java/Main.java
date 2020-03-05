@@ -1,5 +1,4 @@
 import com.google.gson.*;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +14,10 @@ public class Main {
     ServerSocket ding;
     Socket dong = null;
 
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .disableHtmlEscaping()
+            .create();
     String json = "";
 
     try {
@@ -72,6 +74,12 @@ public class Main {
         // Body of our response
         //writer.println("<h1>Hello from 413</h1>");
         writer.println("<p>" + json + "/<p>");
+
+        if (json.contains("listItems")) {
+          for (int i = 0; i < ItemsProcessor.itemsList.size(); i++ ) {
+            writer.println(gson.toJson(ItemsProcessor.itemsList.get(i)));
+          }
+        }
 
         dong.close();
       }
