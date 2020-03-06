@@ -72,12 +72,18 @@ public class Main {
         writer.println("");
 
         // Body of our response
-        //writer.println("<h1>Hello from 413</h1>");
-        writer.println("<p>" + json + "/<p>");
+        /*
+        if (json.isEmpty()) {
+          writer.println("<h4>Hello from 413</h4>");
+        }
+        */
+        writer.println("<p>" + json + "/<p>"); // to browser
+        System.out.println(json); // to console
 
         if (json.contains("listItems")) {
           for (int i = 0; i < ItemsProcessor.itemsList.size(); i++ ) {
             writer.println(gson.toJson(ItemsProcessor.itemsList.get(i)));
+            System.out.println(gson.toJson(ItemsProcessor.itemsList.get(i)));
           }
         }
 

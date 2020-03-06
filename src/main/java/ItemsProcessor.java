@@ -26,19 +26,14 @@ public class ItemsProcessor extends Factory {
         // For testing
         System.out.println("From ItemsProcessor");
         System.out.println("Add Item");
-        // To do: add name, price, machineCode via DAO? Then send where?
-
 
         UUID uuid = UUID.randomUUID();
         String machineCode = uuid.toString();
 
-        ItemsDTO addItemsDTO = new ItemsDTO(args.get("name"), args.get("price"), machineCode);
+        ItemsDAO addItemsDAO = new ItemsDAO();
+        ItemsDTO addItemsDTO = addItemsDAO.addItems(args.get("name"), args.get("price"), machineCode);
         args.put("machineCode", machineCode);
         ResponseDTO addItemsResponseDTO = new ResponseDTO(date, args, "OK", "Item Added");
-
-        //ItemsDAO addItemsResponseDAO = new ItemsDAO(addItemsResponseDTO);
-        //return addItemsResponseDAO;
-
         itemsList.add(addItemsDTO);
 
         return addItemsResponseDTO;
@@ -48,7 +43,6 @@ public class ItemsProcessor extends Factory {
         // For testing
         System.out.println("From ItemsProcessor");
         System.out.println("List Items");
-        // To do: list all items, as in list DAO objects?
 
         return new ResponseDTO(date, args, "OK", "List of Items");
     }

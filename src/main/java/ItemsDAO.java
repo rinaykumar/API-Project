@@ -1,18 +1,15 @@
-import builder.ResponseDTO;
-
 public class ItemsDAO {
 
     private static ItemsDAO Instance;
-    private static ResponseDTO response;
 
     public static ItemsDAO getInstance(){
         if(Instance == null){
-            Instance = new ItemsDAO(response);
+            Instance = new ItemsDAO();
         }
         return Instance;
     }
 
-    ItemsDAO(ResponseDTO response){
-
+    public ItemsDTO addItems(String name, String price, String machineCode) {
+        return new ItemsDTO(name, price, machineCode);
     }
 }
