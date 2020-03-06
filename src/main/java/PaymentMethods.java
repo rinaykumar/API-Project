@@ -27,7 +27,7 @@ public class PaymentMethods extends Factory {
         String machineCode = uuid.toString();
 
         PaymentDAO addPayDAO = new PaymentDAO();
-        addPayDAO.addPayment(args.get("name"), machineCode);
+        addPayDAO.addPayment(args.get("method"), machineCode);
 
         args.put("machineCode", machineCode);
 
