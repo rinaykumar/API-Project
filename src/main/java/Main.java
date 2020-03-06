@@ -1,3 +1,4 @@
+import com.google.gson.*;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,12 +7,20 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.*;
 
 public class Main {
 
   public static void main(String[] args) throws IOException {
     ServerSocket ding;
     Socket dong = null;
+
+    Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .disableHtmlEscaping()
+            .create();
+    String json = "";
+
     try {
       ding = new ServerSocket(1299);
       System.out.println("Opened socket " + 1299);
@@ -31,6 +40,11 @@ public class Main {
           String line = in.readLine();
           System.out.println("----------REQUEST START---------");
           System.out.println(line);
+
+          // Send to Factory
+          Factory factory = new Factory();
+          json = gson.toJson(factory.process(line));
+
           // read only headers
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
@@ -59,7 +73,40 @@ public class Main {
         writer.println("");
 
         // Body of our response
-        writer.println("<h1>Hello from 413</h1>");
+        if (json.equals("null")) {
+          writer.println("<h2>Welcome to CSC 413 HW1</h2>");
+        } else {
+          writer.println("<p>" + json + "/<p>"); // to browser
+          System.out.println(json); // to console
+
+          // listItems
+          if (json.contains("listItems")) {
+            List<ItemsDTO> itemsList = ItemsDAO.getItemsList();
+            for (ItemsDTO itemsDTO : itemsList) {
+              writer.println(gson.toJson(itemsDTO));
+              System.out.println(gson.toJson(itemsDTO));
+            }
+          }
+
+          // getAllPaymentMethods
+          if (json.contains("getAllPaymentMethods")) {
+            List<PaymentDTO> PaymentList = PaymentDAO.getPaymentList();
+            for (PaymentDTO paymentDTO : PaymentList) {
+              writer.println(gson.toJson(paymentDTO));
+              // System.out.println(gson.toJson(paymentDTO));
+            }
+          }
+
+          // listTransactions
+          if (json.contains("listTransactions")) {
+            List<TransactionDTO> transactionList = TransactionDAO.listTransaction();
+            for (TransactionDTO transactionDTO : transactionList) {
+              writer.println(gson.toJson(transactionDTO));
+              System.out.println(gson.toJson(transactionDTO));
+            }
+          }
+
+        }
 
         dong.close();
       }
