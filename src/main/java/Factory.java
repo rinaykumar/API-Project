@@ -61,13 +61,13 @@ public class Factory {
                 // Send args map ItemsProcessor
 
             case "createTransaction":
-                TransactionProcessor transactionProcessor2 = new TransactionProcessor();
-                return transactionProcessor2.process(args);
+                TransactionProcessor createTransactionProcess = new TransactionProcessor();
+                return createTransactionProcess.process(args);
             case "listTransactions":
                 // Send args map to TransactionsProcessor
                 System.out.println("List Transactions!!!");
-                TransactionProcessor transactionProcessor = new TransactionProcessor();
-                return transactionProcessor.process(args);
+                TransactionProcessor listTransactionProcessor = new TransactionProcessor();
+                return listTransactionProcessor.process(args);
             default:
                 // Not valid, send error code?
                 System.out.println("Error"); // For testing

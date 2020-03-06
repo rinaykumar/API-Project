@@ -11,12 +11,10 @@ public class TransactionProcessor extends Factory {
         String endpoint = args.get("endpoint");
 
         if (endpoint.equals("createTransaction")) {
-            System.out.println("Inside Create Transactions");
             return createTransaction(args);
         }
 
         if (endpoint.equals("listTransactions")) {
-            System.out.println("Inside Listing Transactions");
             return listTransactions(args);
         }
         return null;
@@ -24,13 +22,12 @@ public class TransactionProcessor extends Factory {
 
     private ResponseDTO listTransactions(Map<String, String> args) {
         return new ResponseDTO(date, args, "OK", "List of Transactions");
-        // list transactions
     }
 
     private ResponseDTO createTransaction(Map<String, String> args) {
-        // create transactions
+        TransactionDAO createTransactionDAO = new TransactionDAO();
+        TransactionDTO createTransactionDTO =  createTransactionDAO.addTransaction(args.get("paymentMethod"),args.get("itemCode"));
 
-        TransactionDTO createTransactionDTO = new TransactionDTO(args.get("paymentMethod"),args.get("itemCode"));
         ResponseDTO createTransactionResponseDTO = new ResponseDTO(date, args, "OK", "Item Added");
 
         transactionList.add(createTransactionDTO);

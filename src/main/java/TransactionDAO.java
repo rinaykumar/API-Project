@@ -6,6 +6,7 @@ public class TransactionDAO {
 
     private static TransactionDAO Instance;
     private List<TransactionDTO> database = new ArrayList<>();
+
     public static TransactionDAO getInstance(){
         if(Instance == null){
             Instance = new TransactionDAO();
@@ -22,7 +23,8 @@ public class TransactionDAO {
         return true;
     }
 
-    private TransactionDAO() {
-        // constructor
+
+    public TransactionDTO addTransaction(String paymentMethod, String itemCode) {
+        return new TransactionDTO(paymentMethod, itemCode);
     }
 }
