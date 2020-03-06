@@ -64,9 +64,12 @@ public class Factory {
                 ItemsProcessor itemsProcessor = new ItemsProcessor();
                 return itemsProcessor.process(args);
             case "createTransaction":
+                TransactionProcessor createTransactionProcess = new TransactionProcessor();
+                return createTransactionProcess.process(args);
             case "listTransactions":
-                // Send args map to TransactionsProcessor
-                break;
+                System.out.println("List Transactions!!!");
+                TransactionProcessor listTransactionProcessor = new TransactionProcessor();
+                return listTransactionProcessor.process(args);
             case "" :
                 return null;
             default:

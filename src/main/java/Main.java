@@ -89,8 +89,22 @@ public class Main {
           }
 
           // getAllPaymentMethods
+          if (json.contains("getAllPaymentMethods")) {
+            List<PaymentDTO> PaymentList = PaymentDAO.getPaymentList();
+            for (PaymentDTO paymentDTO : PaymentList) {
+              writer.println(gson.toJson(paymentDTO));
+              // System.out.println(gson.toJson(paymentDTO));
+            }
+          }
 
           // listTransactions
+          if (json.contains("listTransactions")) {
+            List<TransactionDTO> transactionList = TransactionDAO.listTransaction();
+            for (TransactionDTO transactionDTO : transactionList) {
+              writer.println(gson.toJson(transactionDTO));
+              System.out.println(gson.toJson(transactionDTO));
+            }
+          }
 
         }
 
