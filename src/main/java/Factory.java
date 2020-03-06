@@ -1,8 +1,9 @@
 import java.util.*;
+import builder.ResponseDTO;
 
 public class Factory {
 
-    public static void process(String input) {
+    public static ResponseDTO process(String input) {
         int firstSlashIndex,
                 firstQuestIndex,
                 httpIndex,
@@ -60,16 +61,18 @@ public class Factory {
                 // Send args map ItemsProcessor
 
             case "createTransaction":
-                // Send request to TransactionsProcessor
-
+                TransactionProcessor transactionProcessor2 = new TransactionProcessor();
+                return transactionProcessor2.process(args);
             case "listTransactions":
                 // Send args map to TransactionsProcessor
+                System.out.println("List Transactions!!!");
                 TransactionProcessor transactionProcessor = new TransactionProcessor();
-                transactionProcessor.process(args);
-                break;
+                return transactionProcessor.process(args);
             default:
                 // Not valid, send error code?
                 System.out.println("Error"); // For testing
         }
+        return null;
     }
+
 }

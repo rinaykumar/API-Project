@@ -6,10 +6,16 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import com.google.gson.*;
 
 public class Main {
 
   public static void main(String[] args) throws IOException {
+    Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .disableHtmlEscaping()
+            .create();
+    String json = "";
     ServerSocket ding;
     Socket dong = null;
     try {
@@ -43,7 +49,7 @@ public class Main {
 
           // Send to Factory
           Factory factory = new Factory();
-          factory.process(line);
+          json = gson.toJson(factory.process(line));
 
           line = in.readLine();
           while (line != null && line.trim().length() > 0) {
@@ -72,9 +78,17 @@ public class Main {
         writer.println("");
 
         // Body of our response
-        writer.println("<h1>Made a branch</h1>");
+//        writer.println("<h1>Made a branch</h1>");
+        writer.println("<p>" + json + "/<p>");
 
+        if (json.contains("listTransactions")) {
+          for (int i = 0; i < TransactionProcessor.transactionList.size(); i++ ) {
+            writer.println(gson.toJson(TransactionProcessor.transactionList.get(i)));
+          }
+        }
         dong.close();
+
+
       }
     } catch (IOException e) {
       System.out.println("Error opening socket");

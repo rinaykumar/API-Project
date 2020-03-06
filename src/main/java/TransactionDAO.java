@@ -1,11 +1,11 @@
 import java.util.List;
-import java.util.Stack;
+import java.util.ArrayList;
 import builder.ResponseDTO;
 
 public class TransactionDAO {
 
     private static TransactionDAO Instance;
-
+    private List<TransactionDTO> database = new ArrayList<>();
     public static TransactionDAO getInstance(){
         if(Instance == null){
             Instance = new TransactionDAO();
@@ -14,7 +14,7 @@ public class TransactionDAO {
     }
 
     public static List listTransaction() {
-        List<Integer> transactionList = new Stack<Integer>();
+        List<Integer> transactionList = new ArrayList<>();
         return transactionList;
     }
 
