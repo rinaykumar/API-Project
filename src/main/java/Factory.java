@@ -1,3 +1,4 @@
+import builder.ResponseBuilder;
 import builder.ResponseDTO;
 import java.util.*;
 
@@ -70,7 +71,14 @@ public class Factory {
                 return null;
             default:
                 System.out.println("Error"); // For testing
-                return new ResponseDTO(date, args, "ERROR", "Input Error");
+
+                ResponseBuilder buildResponse = new ResponseBuilder();
+                buildResponse.setDate(date);
+                buildResponse.setParams(args);
+                buildResponse.setResponseCode("ERROR");
+                buildResponse.setResponse("Input Error");
+
+                return buildResponse.build();
         }
         return null;
     }

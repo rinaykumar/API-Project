@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.*;
 
 public class Main {
 
@@ -80,9 +81,10 @@ public class Main {
 
           // listItems
           if (json.contains("listItems")) {
-            for (int i = 0; i < ItemsProcessor.itemsList.size(); i++) {
-              writer.println(gson.toJson(ItemsProcessor.itemsList.get(i)));
-              System.out.println(gson.toJson(ItemsProcessor.itemsList.get(i)));
+            List<ItemsDTO> itemsList = ItemsDAO.getItemsList();
+            for (ItemsDTO itemsDTO : itemsList) {
+              writer.println(gson.toJson(itemsDTO));
+              System.out.println(gson.toJson(itemsDTO));
             }
           }
 

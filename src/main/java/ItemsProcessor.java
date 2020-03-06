@@ -5,7 +5,6 @@ import java.util.*;
 
 public class ItemsProcessor extends Factory {
 
-    public static List<ItemsDTO> itemsList = new ArrayList<ItemsDTO>();
     Date date = new Date();
 
     public ResponseDTO process(Map<String, String> args) {
@@ -32,11 +31,9 @@ public class ItemsProcessor extends Factory {
         String machineCode = uuid.toString();
 
         ItemsDAO addItemsDAO = new ItemsDAO();
-        ItemsDTO addItemsDTO = addItemsDAO.addItems(args.get("name"), args.get("price"), machineCode);
+        addItemsDAO.addItems(args.get("name"), args.get("price"), machineCode);
 
         args.put("machineCode", machineCode);
-
-        itemsList.add(addItemsDTO);
 
         ResponseBuilder buildResponse = new ResponseBuilder();
         buildResponse.setDate(date);

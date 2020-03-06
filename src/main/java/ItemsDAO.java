@@ -1,6 +1,12 @@
+import java.util.*;
+
 public class ItemsDAO {
 
     private static ItemsDAO Instance;
+    public static List<ItemsDTO> itemsList = new ArrayList<ItemsDTO>();
+
+    ItemsDAO() {
+    }
 
     public static ItemsDAO getInstance(){
         if(Instance == null){
@@ -9,7 +15,11 @@ public class ItemsDAO {
         return Instance;
     }
 
-    public ItemsDTO addItems(String name, String price, String machineCode) {
-        return new ItemsDTO(name, price, machineCode);
+    public void addItems(String name, String price, String machineCode) {
+        itemsList.add(new ItemsDTO(name, price, machineCode));
+    }
+
+    public static List<ItemsDTO> getItemsList() {
+        return itemsList;
     }
 }
