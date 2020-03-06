@@ -57,7 +57,8 @@ public class Factory {
             case "addPaymentMethod":
             case "getAllPaymentMethods":
                 // Send args map to PaymentProcessor
-                break;
+                PaymentMethods PaymentMethods = new PaymentMethods();
+                return PaymentMethods.process(args);
             case "addItem":
             case "listItems":
                 // Send args map ItemsProcessor
@@ -83,6 +84,5 @@ public class Factory {
 
                 return buildResponse.build();
         }
-        return null;
     }
 }
