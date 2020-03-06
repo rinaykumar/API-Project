@@ -56,9 +56,13 @@ public class Processor {
         for (Map.Entry<String, String> entry : args.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+       // System.out.println("----------------TEST--------------");
+        //System.out.println(args);
+
         switch(method){
-            case "/addPaymentMethod":
-             //   System.out.println("addPaymentTest");
+            case "addPaymentMethod":
+            case "getAllPaymentMethods":
+                //System.out.println("FACTORY");
                 PaymentMethods PaymentMethods = new PaymentMethods();
                 return PaymentMethods.process(args);
 
@@ -70,13 +74,13 @@ public class Processor {
                  //      builder.build();
 
 
-            case "/getAllPaymentMethods":
-                ResponseBuilder builder2 = new ResponseBuilder()
-                        .setDate(new Date())
-                        .setResCode("OK")
-                        .setResponse("To be updated. . . ")
-                        .setPara(args);
-                        builder2.build();
+
+              //  ResponseBuilder builder2 = new ResponseBuilder()
+                //        .setDate(new Date())
+                  //      .setResCode("OK")
+                    //    .setResponse("To be updated. . . ")
+                      //  .setPara(args);
+                        //builder2.build();
         }
 
         return null;

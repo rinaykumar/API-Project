@@ -9,7 +9,7 @@ public class ResponseDTO {
     public final String response;
     public final Date date;
 
-    public ResponseDTO( Date date, String responseCode, String response, Map<String,String>params) {
+    public ResponseDTO( Date date, String responseCode, String response, Map<String,String>params ) {
 
         this.date = date;
         this.params = params;

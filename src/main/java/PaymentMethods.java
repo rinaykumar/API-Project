@@ -2,20 +2,20 @@ import java.util.*;
 
 //I'm making the assumption of using PaymentDTO (as a cursor) to access PaymentDAO then return ResponseDTO
 public class PaymentMethods extends Processor {
-    public static PaymentDAO PaymentDatabase = new PaymentDAO();
     Date date = new Date();
 
     public ResponseDTO process(Map<String, String> args) {
-
+         //   System.out.println("PASS IN PROCESS");
         String endpoint = args.get("endpoint");
 
         // After getting endpoint, either addItem or listItems method is called
-        if (endpoint.equals("addItem")) {
+        if (endpoint.equals("addPaymentMethod")) {
+           // System.out.println("PASS IN HERE");
             return addPay(args);
         }
 
-        if (endpoint.equals("listItems")) {
-            return getPay();
+        if (endpoint.equals("getAllPaymentMethods")) {
+            return getPay(args);
         }
         return null;
     }
@@ -24,15 +24,32 @@ public class PaymentMethods extends Processor {
         UUID uuid = UUID.randomUUID();
         String machineCode = uuid.toString();
 
-        PaymentDTO addPayDTO = new PaymentDTO(args.get("method"), machineCode);
+        PaymentDAO addPayDAO = new PaymentDAO();
+        addPayDAO.addPayment(args.get("name"), machineCode);
+
         args.put("machineCode", machineCode);
-        PaymentDatabase.save(addPayDTO);
-        return new ResponseDTO(date, "OK", "Item Added", args);
+
+
+        ResponseBuilder buildResponse = new ResponseBuilder();
+        buildResponse.setDate(date);
+        buildResponse.setResponse("Payment Added");
+        buildResponse.setPara(args);
+        buildResponse.setResCode("OK");
+
+
+        return buildResponse.build();
     }
 
-    public ResponseDTO getPay(){
-        PaymentDatabase.getInstance();
-        return new ResponseDTO(date, "OK", "List of Items");
+    public ResponseDTO getPay(Map<String,String>args){
+
+        ResponseBuilder buildResponse = new ResponseBuilder();
+        buildResponse.setDate(date);
+        buildResponse.setPara(args);
+        buildResponse.setResCode("OK");
+        buildResponse.setResponse("List of Payments");
+
+        return buildResponse.build();
+
     }
 }
 

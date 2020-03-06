@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
+
 import com.google.gson.*;
 
 public class Main {
@@ -71,6 +73,14 @@ public class Main {
         // Body of our response
         writer.println("<h1>Homework 1 codecamp101 </h1>");
         writer.println("<body>" + json +"</body>");
+
+        if (json.contains("getAllPaymentMethods")) {
+          List<PaymentDTO> PaymentList = PaymentDAO.getPaymentList();
+          for (PaymentDTO paymentDTO : PaymentList) {
+            writer.println(gson.toJson(paymentDTO));
+           // System.out.println(gson.toJson(paymentDTO));
+          }
+        }
 
         dong.close();
       }

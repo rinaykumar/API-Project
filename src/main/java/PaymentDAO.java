@@ -1,23 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 public class PaymentDAO {
     private static PaymentDAO Instance;
 
-    private List<PaymentDTO> database = new ArrayList<>();
+    public static List<PaymentDTO> database = new ArrayList<>();
 
-    public List<PaymentDTO> getInstance(){
-        if(Instance == null){
+    public static PaymentDAO getInstance() {
+        if (Instance == null) {
             Instance = new PaymentDAO();
         }
+        return Instance;
+    }
+
+    public void addPayment(String name, String machineCode) {
+        database.add(new PaymentDTO(name, machineCode));
+
+    }
+
+    public static List<PaymentDTO>getPaymentList(){
         return database;
     }
-
-    public void save(PaymentDTO data){
-        database.add(data);
-    }
-
-    //optional, can be removed when merge, not implemented
-    public void delete(PaymentDTO data){
-        database.remove(data);
-    }
 }
+
