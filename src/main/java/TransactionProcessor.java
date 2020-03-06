@@ -1,3 +1,4 @@
+import builder.ResponseBuilder;
 import builder.ResponseDTO;
 import java.util.*;
 
@@ -21,16 +22,30 @@ public class TransactionProcessor extends Factory {
     }
 
     private ResponseDTO listTransactions(Map<String, String> args) {
-        return new ResponseDTO(date, args, "OK", "List of Transactions");
+
+        // Use response builder to build response
+        ResponseBuilder buildResponse = new ResponseBuilder();
+        buildResponse.setDate(date);
+        buildResponse.setParams(args);
+        buildResponse.setResponseCode("OK");
+        buildResponse.setResponse("List of Items");
+
+        return buildResponse.build();
     }
 
     private ResponseDTO createTransaction(Map<String, String> args) {
         TransactionDAO createTransactionDAO = new TransactionDAO();
         TransactionDTO createTransactionDTO =  createTransactionDAO.createTransaction(args.get("paymentMethod"),args.get("itemCode"));
 
-        ResponseDTO createTransactionResponseDTO = new ResponseDTO(date, args, "OK", "Item Added");
-
         transactionList.add(createTransactionDTO);
-        return createTransactionResponseDTO;
+
+        // Use response builder to build response
+        ResponseBuilder buildResponse = new ResponseBuilder();
+        buildResponse.setDate(date);
+        buildResponse.setParams(args);
+        buildResponse.setResponseCode("OK");
+        buildResponse.setResponse("Item Added");
+
+        return buildResponse.build();
     }
 }

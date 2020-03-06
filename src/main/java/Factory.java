@@ -11,6 +11,7 @@ public class Factory {
                 firstAndIndex = 0;
         String process = ""; // Stores the process
         Map<String, String> args = new HashMap<String, String>(); // Stores the params and values
+        Date date = new Date();
 
         // Parse the input to get process and params/values
         firstSlashIndex = input.indexOf('/');
@@ -68,9 +69,11 @@ public class Factory {
                 System.out.println("List Transactions!!!");
                 TransactionProcessor listTransactionProcessor = new TransactionProcessor();
                 return listTransactionProcessor.process(args);
+            case "" :
+                return null;
             default:
                 // Not valid, send error code?
-                System.out.println("Error"); // For testing
+                return new ResponseDTO(date, args, "ERROR", "Input Error");
         }
         return null;
     }

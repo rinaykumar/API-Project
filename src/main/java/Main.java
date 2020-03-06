@@ -79,7 +79,12 @@ public class Main {
 
         // Body of our response
 //        writer.println("<h1>Made a branch</h1>");
-        writer.println("<p>" + json + "/<p>");
+        if (json.equals("null")) {
+          writer.println("<h2>Welcome to CSC 413 HW1</h2>");
+        } else {
+          writer.println("<p>" + json + "/<p>"); // to browser
+          System.out.println(json); // to console
+        }
 
         if (json.contains("listTransactions")) {
           for (int i = 0; i < TransactionProcessor.transactionList.size(); i++ ) {
