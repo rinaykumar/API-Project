@@ -5,7 +5,7 @@ import builder.ResponseDTO;
 public class TransactionDAO {
 
     private static TransactionDAO Instance;
-    private List<TransactionDTO> database = new ArrayList<>();
+    private static List<TransactionDTO> transactionList = new ArrayList<>();
 
     public static TransactionDAO getInstance(){
         if(Instance == null){
@@ -14,8 +14,7 @@ public class TransactionDAO {
         return Instance;
     }
 
-    public static List listTransaction() {
-        List<Integer> transactionList = new ArrayList<>();
+    public static List<TransactionDTO> listTransaction() {
         return transactionList;
     }
 
@@ -24,7 +23,7 @@ public class TransactionDAO {
     }
 
 
-    public TransactionDTO createTransaction(String paymentMethod, String itemCode) {
-        return new TransactionDTO(paymentMethod, itemCode);
+    public void createTransaction(String paymentMethod, String itemCode) {
+        transactionList.add(new TransactionDTO(paymentMethod,itemCode));
     }
 }

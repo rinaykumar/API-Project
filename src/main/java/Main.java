@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
+
 import com.google.gson.*;
 
 public class Main {
@@ -86,11 +88,16 @@ public class Main {
           System.out.println(json); // to console
         }
 
+
+
         if (json.contains("listTransactions")) {
-          for (int i = 0; i < TransactionProcessor.transactionList.size(); i++ ) {
-            writer.println(gson.toJson(TransactionProcessor.transactionList.get(i)));
+          List<TransactionDTO> transactionList = TransactionDAO.listTransaction();
+          for (TransactionDTO transactionDTO : transactionList) {
+            writer.println(gson.toJson(transactionDTO));
+            System.out.println(gson.toJson(transactionDTO));
           }
         }
+
         dong.close();
 
 

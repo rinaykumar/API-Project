@@ -1,5 +1,6 @@
 import java.util.*;
 import builder.ResponseDTO;
+import builder.ResponseBuilder;
 
 public class Factory {
 
@@ -72,8 +73,14 @@ public class Factory {
             case "" :
                 return null;
             default:
-                // Not valid, send error code?
-                return new ResponseDTO(date, args, "ERROR", "Input Error");
+                // Return responseBuilder response
+                ResponseBuilder buildResponse = new ResponseBuilder();
+                buildResponse.setDate(date);
+                buildResponse.setParams(args);
+                buildResponse.setResponseCode("ERROR");
+                buildResponse.setResponse("Input Error");
+
+                return buildResponse.build();
         }
         return null;
     }

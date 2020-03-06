@@ -4,7 +4,6 @@ import java.util.*;
 
 public class TransactionProcessor extends Factory {
 
-    public static List<TransactionDTO> transactionList = new ArrayList<TransactionDTO>();
     Date date = new Date();
 
     public ResponseDTO process(Map<String, String> args) {
@@ -35,9 +34,7 @@ public class TransactionProcessor extends Factory {
 
     private ResponseDTO createTransaction(Map<String, String> args) {
         TransactionDAO createTransactionDAO = new TransactionDAO();
-        TransactionDTO createTransactionDTO =  createTransactionDAO.createTransaction(args.get("paymentMethod"),args.get("itemCode"));
-
-        transactionList.add(createTransactionDTO);
+        createTransactionDAO.createTransaction(args.get("paymentMethod"),args.get("itemCode"));
 
         // Use response builder to build response
         ResponseBuilder buildResponse = new ResponseBuilder();
