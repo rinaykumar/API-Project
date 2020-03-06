@@ -24,7 +24,7 @@ public class TransactionDAO {
     }
 
 
-    public TransactionDTO addTransaction(String paymentMethod, String itemCode) {
+    public TransactionDTO createTransaction(String paymentMethod, String itemCode) {
         return new TransactionDTO(paymentMethod, itemCode);
     }
 }

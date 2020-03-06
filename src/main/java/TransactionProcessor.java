@@ -26,7 +26,7 @@ public class TransactionProcessor extends Factory {
 
     private ResponseDTO createTransaction(Map<String, String> args) {
         TransactionDAO createTransactionDAO = new TransactionDAO();
-        TransactionDTO createTransactionDTO =  createTransactionDAO.addTransaction(args.get("paymentMethod"),args.get("itemCode"));
+        TransactionDTO createTransactionDTO =  createTransactionDAO.createTransaction(args.get("paymentMethod"),args.get("itemCode"));
 
         ResponseDTO createTransactionResponseDTO = new ResponseDTO(date, args, "OK", "Item Added");
 
