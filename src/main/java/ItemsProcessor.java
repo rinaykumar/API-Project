@@ -1,3 +1,4 @@
+import builder.ResponseBuilder;
 import builder.ResponseDTO;
 
 import java.util.*;
@@ -32,11 +33,18 @@ public class ItemsProcessor extends Factory {
 
         ItemsDAO addItemsDAO = new ItemsDAO();
         ItemsDTO addItemsDTO = addItemsDAO.addItems(args.get("name"), args.get("price"), machineCode);
+
         args.put("machineCode", machineCode);
-        ResponseDTO addItemsResponseDTO = new ResponseDTO(date, args, "OK", "Item Added");
+
         itemsList.add(addItemsDTO);
 
-        return addItemsResponseDTO;
+        ResponseBuilder buildResponse = new ResponseBuilder();
+        buildResponse.setDate(date);
+        buildResponse.setParams(args);
+        buildResponse.setResponseCode("OK");
+        buildResponse.setResponse("Item Added");
+
+        return buildResponse.build();
     }
 
     public ResponseDTO listItems(Map<String, String> args) {
@@ -44,6 +52,12 @@ public class ItemsProcessor extends Factory {
         System.out.println("From ItemsProcessor");
         System.out.println("List Items");
 
-        return new ResponseDTO(date, args, "OK", "List of Items");
+        ResponseBuilder buildResponse = new ResponseBuilder();
+        buildResponse.setDate(date);
+        buildResponse.setParams(args);
+        buildResponse.setResponseCode("OK");
+        buildResponse.setResponse("List of Items");
+
+        return buildResponse.build();
     }
 }

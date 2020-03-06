@@ -46,7 +46,7 @@ public class Factory {
             args.put(param, value);
         }
 
-        // Testing parsing by printing out
+        // Testing parsing by printing out map
         for (Map.Entry<String, String> entry : args.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
@@ -66,10 +66,11 @@ public class Factory {
             case "listTransactions":
                 // Send args map to TransactionsProcessor
                 break;
+            case "" :
+                return null;
             default:
-                // Not valid, send error code?
                 System.out.println("Error"); // For testing
-                //return new ResponseDTO(date, args, "ERROR", "Input Error");
+                return new ResponseDTO(date, args, "ERROR", "Input Error");
         }
         return null;
     }

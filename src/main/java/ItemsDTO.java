@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class ItemsDTO {
     public final String name;
     public final String price;
